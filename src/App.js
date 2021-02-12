@@ -1,25 +1,29 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import {BrowserRouter as Router, Switch, Route} from 'react-router-dom'
+import MainMenu from "./components/MainMenu";
+import AddNew from "./components/AddNew";
+import EditNew from "./components/EditNew";
+import {GlobalProvider} from "./context/GlobalState";
+import NewShow from "./components/News/NewShow";
+
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+    return (
+        <div>
+            <GlobalProvider>
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={MainMenu}/>
+                        <Route path="/add" component={AddNew}/>
+                        <Route path="/edit:id" component={EditNew}/>
+                        <Route path="/show:id" component={NewShow}/>
+                    </Switch>
+                </Router>
+            </GlobalProvider>
+        </div>
+    );
 }
 
 export default App;
