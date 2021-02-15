@@ -7,9 +7,9 @@ const CardsNews = () => {
     return (
         <div className="container-fluid d-flex justify-content-center">
             <div className="row">
-                {news.news.length > 0 ? (
+                {news.length > 0 ? (
                     <>
-                        {news.news.map(article => (
+                        {news.map(article => (
                             <div className="text-center" style={{padding: "20px"}} key={article.id}>
                                 <CardNew article={article}/>
                             </div>

@@ -1,21 +1,21 @@
-export default (news, action) => {
+export default (state, action) => {
     switch (action.type) {
 
         case 'REMOVE_NEWS':
             return {
-                news: news.news.filter(article => {
+                news: state.news.filter(article => {
                     return article.id !== action.payload
                 })
             }
         case 'ADD_NEWS':
             return {
-                news: [action.payload, ...news.news]
+                news: [action.payload, ...state.news]
             }
 
         case 'EDIT_USER':
             const updateNew = action.payload
 
-            const updateNews = news.news.map(article => {
+            const updateNews = state.news.map(article => {
                 if (article.id === updateNew.id) {
                     return updateNew
                 }
@@ -27,6 +27,6 @@ export default (news, action) => {
             }
 
         default:
-            return news.news
+            return state
     }
 }

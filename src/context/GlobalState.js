@@ -1,21 +1,23 @@
 import React, {createContext, useReducer, useEffect} from 'react'
 import AppReducer from './AppReducer'
+import App from "../App";
 
-// const initialState = {
-//     news: []
-// }
+const initialState = {
+    news: []
+}
 
-export const GlobalContext = createContext();
+export const GlobalContext = createContext(initialState);
 
 export const GlobalProvider = ({children}) => {
-    const [news, dispatch] = useReducer(AppReducer, [], () => {
-        const localData = localStorage.getItem('news')
-        return localData ? JSON.parse(localData) : []
+
+    const [state, dispatch] = useReducer(AppReducer, initialState, () => {
+        const localData = localStorage.getItem('state')
+        return localData ? JSON.parse(localData) : initialState
     })
 
     useEffect(() => {
-        localStorage.setItem('news', JSON.stringify(news))
-    }, [news])
+        localStorage.setItem('state', JSON.stringify(state))
+    }, [state])
 
     const removeNews = (id) => {
         dispatch({
@@ -40,7 +42,7 @@ export const GlobalProvider = ({children}) => {
 
     return (
         <GlobalContext.Provider value={{
-            news: news,
+            news: state.news,
             removeNews,
             addNews,
             editNews

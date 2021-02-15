@@ -19,7 +19,7 @@ const NewShow = (props) => {
     useEffect(() => {
 
         const newId = currentNewId
-        const showNew = news.news.find(article => article.id === newId)
+        const showNew = news.find(article => article.id === newId)
 
         setSelectedNewsTitle(showNew)
 
